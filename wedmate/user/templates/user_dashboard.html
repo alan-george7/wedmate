@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/user_dashboard.css' %}">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo">🎊 EventHub</div>
+        <nav class="nav-buttons">
+            <a href="{% url 'my_wishlist' %}">❤️ Wishlist</a>
+            <a href="{% url 'user_bookings' %}">📅 My Bookings</a>
+            <a href="{% url 'home' %}">🏠 Home</a>
+            <a href="{% url 'user_logout' %}" class="logout-btn">🚪 Logout</a>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <h2 class="welcome">Welcome🎉</h2>
+
+        <div class="category-grid">
+            <a href="{% url 'show_venue' %}" class="category-card">🏛️ Venues</a>
+            <a href="{% url 'show_photography' %}" class="category-card">📸 Photography</a>
+            <a href="{% url 'show_makeup' %}" class="category-card">💄 Makeup</a>
+            <a href="{% url 'show_catering' %}" class="category-card">🍽️ Catering</a>
+            <a href="{% url 'show_decor' %}" class="category-card">🎀 Decor</a>
+            <a href="{% url 'show_music' %}" class="category-card">🎵 Music/Dance</a>
+            <a href="{% url 'show_events' %}" class="category-card">🏢 Corporate Event</a>
+        </div>
+    </main>
+</body>
+</html>

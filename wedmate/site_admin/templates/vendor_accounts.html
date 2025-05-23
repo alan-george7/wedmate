@@ -1,0 +1,27 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vendor Accounts</title>
+    <link rel="stylesheet" href="{% static 'css/account_tables.css' %}">
+</head>
+<body>
+<div class="container">
+    <a href="{% url 'admin_dashboard' %}" class="nav-link">← Back to Dashboard</a>
+    <h2>Vendor Accounts</h2>
+    <table>
+        <tr><th>Name</th><th>Email</th><th>Organization</th><th>Action</th></tr>
+        {% for vendor in vendors %}
+        <tr>
+            <td>{{ vendor.name }}</td>
+            <td>{{ vendor.email }}</td>
+            <td>{{ vendor.organization }}</td>
+            <td><a href="{% url 'delete_vendor' vendor.id %}" class="action-btn" onclick="return confirm('Delete this vendor?')">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>

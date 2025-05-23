@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ business_type }} Vendors</title>
+    <link rel="stylesheet" href="{% static 'css/vendor_list.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h2 class="title">{{ business_type }} Vendors</h2>
+
+    <form method="get" class="filter-form">
+        <label for="budget">Filter by Budget:</label>
+        <select name="budget" id="budget">
+            <option value="">All</option>
+            <option value="low">Less than ₹20,000</option>
+            <option value="medium">₹20,000 – ₹50,000</option>
+            <option value="high">More than ₹50,000</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <div class="vendor-list">
+        {% for vendor in vendors %}
+        <div class="card">
+            <p><strong>Owner:</strong> {{ vendor.name }}</p>
+            <p><strong>Budget:</strong> ₹ {{ vendor.vendorprofile_set.first.budget }}</p>
+            <p><strong>Place:</strong> {{ vendor.place }}</p>
+            <a href="{% url 'view_vendor_profile' vendor.id %}" class="btn btn-success">View Profile</a>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="back-link">
+        <a href="{% url 'user_dashboard' %}">⬅ Back to Dashboard</a>
+    </div>
+</div>
+</body>
+</html>

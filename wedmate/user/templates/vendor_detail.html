@@ -1,0 +1,83 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ vendor.name }} - Details</title>
+    <link rel="stylesheet" href="{% static 'css/vendor_detail.css' %}">
+</head>
+<body>
+    <div class="container">
+
+<!--        <a href="{{ previous_url }}" class="back-btn">← Back</a>-->
+        {% if request.GET.from %}
+            <a href="{{ request.GET.from }}">
+                <button>← Back</button>
+            </a>
+        {% else %}
+            <button onclick="history.back()">← Back</button>
+        {% endif %}
+
+        <a href="{% url 'user_dashboard' %}" class="home-btn">Dashboard</a>
+
+        <div class="vendor-header">
+            <img src="{{ vendor.profile_pic.url }}" alt="Vendor Image">
+            <div>
+                <h2>{{ vendor.name }}</h2>
+                <p><strong>Type:</strong> {{ vendor.business_type }}</p>
+                <p><strong>Location:</strong> {{ vendor.place }}</p>
+                <p><strong>Bio:</strong> {{ vendor.bio }}</p>
+                <p><strong>Budget:</strong> {{ vendor.budget }}</p>
+                <p><strong>Organization:</strong> {{ vendor.organization }}</p>
+            </div>
+        </div>
+
+        <div class="actions">
+            {% if is_wishlisted %}
+                    <button class="wishlist-btn wishlisted" disabled>Wishlisted</button>
+            {% else %}
+                    <form action="{% url 'add_to_wishlist' vendor.id %}?from={{ request.GET.from }}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="wishlist-btn">🤍 Add to Wishlist</button>
+                    </form>
+<!--            <a href="{% url 'add_to_wishlist' vendor.id %}" class="wishlist-btn">🤍 Add to Wishlist</a>-->
+            {% endif %}
+            <a href="{% url 'create_booking' vendor.id %}" class="book-btn">📅 Book Now</a>
+        </div>
+
+        <h3>Work Photos</h3>
+
+        {% if work_photos %}
+            <div class="work-photos">
+                {% for photo in work_photos %}
+                    <img src="{{ photo.photo.url }}" alt="Work Photo" class="work-photo">
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No work photos available.</p>
+        {% endif %}
+
+        <h4>Reviews</h4>
+        <div class="review-section">
+            {% for review in reviews %}
+                <div class="review">
+                    <strong>{{ review.user.name }}</strong>
+                    <p>{{ review.comment }}</p>
+                </div>
+            {% empty %}
+                <p>No reviews yet.</p>
+            {% endfor %}
+        </div>
+
+
+        <form method="POST" action="{% url 'vendor_detail' vendor.id %}?from={{ request.GET.from }}" id="review-form">
+            {% csrf_token %}
+            <textarea name="comment" placeholder="Leave your review..." required></textarea>
+            <button type="submit">Submit Review</button>
+        </form>
+
+
+    </div>
+</body>
+</html>

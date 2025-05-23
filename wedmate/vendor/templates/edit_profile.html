@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="{% static 'css/edit_vendor_profile.css' %}">
+</head>
+<body>
+    <div class="profile-container">
+        <h2>Edit Profile</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Profile Picture</label><br>
+                {% if profile_form.instance.profile_pic %}
+                    <img src="{{ profile_form.instance.profile_pic.url }}" alt="Profile Picture" class="profile-pic-preview"><br>
+                {% endif %}
+                {{ profile_form.profile_pic }}
+            </div>
+
+            <div class="form-group">
+                {{ profile_form.name.label_tag }} {{ profile_form.name }}
+            </div>
+            <div class="form-group">
+                {{ profile_form.organization.label_tag }} {{ profile_form.organization }}
+            </div>
+            <div class="form-group">
+                {{ profile_form.email.label_tag }} {{ profile_form.email }}
+            </div>
+            <div class="form-group">
+                {{ profile_form.mobile.label_tag }} {{ profile_form.mobile }}
+            </div>
+            <div class="form-group">
+                {{ profile_form.business_type.label_tag }} {{ profile_form.business_type }}
+            </div>
+            <div class="form-group">
+                {{ profile_form.place.label_tag }} {{ profile_form.place }}
+            </div>
+            <div class="form-group">
+                {{ profile_form.bio.label_tag }} {{ profile_form.bio }}
+            </div>
+            <div class="form-group">
+                {{ profile_form.budget.label_tag }} {{ profile_form.budget }}
+            </div>
+            <div class="form-group">
+                {{ profile_form.username.label_tag }} {{ profile_form.username }}
+            </div>
+
+            <h3>Work Photos</h3>
+            <div class="work-photos">
+                {% for photo in work_photos %}
+                    <div class="work-photo-item">
+                        <img src="{{ photo.photo.url }}" alt="Work Photo">
+                        <a href="{% url 'delete_work_photo' photo.id %}" class="delete-btn">Delete</a>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label>Add Work Photos</label>
+                <input type="file" name="work_photos" multiple>
+            </div>
+
+            <button type="submit" class="btn">Save Changes</button>
+        </form>
+        <a href="{% url 'view_vendor_profile' %}" class="btn-back">Back to Profile</a>
+    </div>
+</body>
+</html>

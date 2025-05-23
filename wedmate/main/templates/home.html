@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WedMate | Home</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <div class="hero">
+        <nav>
+            <div class="logo">💍 WedMate</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+
+                <li class="dropdown">
+                    <a href="#">Register ⮟</a>
+                    <ul class="dropdown-content">
+                        <li><a href="{% url 'user_register' %}">As User</a></li>
+                        <li><a href="{% url 'vendor_register' %}">As Vendor</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#">Login ⮟</a>
+                    <ul class="dropdown-content">
+                        <li><a href="{% url 'user_login' %}">User Login</a></li>
+                        <li><a href="{% url 'vendor_login' %}">Vendor Login</a></li>
+                        <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <h1>Celebrate Love with <span class="highlight">WedMate</span></h1>
+            <p class="tagline">Your Ultimate Wedding Planning Companion</p>
+            <p class="desc">From venues to vendors, WedMate helps you plan the perfect wedding — effortlessly.</p>
+            <a href="{% url 'user_register' %}" class="cta-button">💖 Start Planning</a>
+        </div>
+    </div>
+</body>
+</html>

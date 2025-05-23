@@ -1,0 +1,45 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vendor Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/vendor_dashboard.css' %}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Welcome, {{ vendor.name }}</h2>
+
+        <ul>
+            {% for value, label in business_choices %}
+                <li>
+                    <a href="{% url 'create_vendor_profile' value %}">
+                        {{ label }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="dashboard-actions">
+            {% if vendor.business_type %}
+                <a href="{% url 'view_vendor_profile' %}">👁️ View My Profile</a>
+                <a href="{% url 'booking_requests' %}" class="edit-button" style="background-color: #007bff; margin-top: 10px;">
+                    📋 Booking Requests
+                </a>
+                <a href="{% url 'vendor_view_bookings' %}" class="dashboard-button">View Bookings</a>
+                <a href="{% url 'home' %}" class="edit-button" style="background-color: #28a745; margin-top: 10px;">
+                    🏠 Go to Home
+                </a>
+            <a href="{% url 'vendor_logout' %}" class="edit-button" style="background-color: #28a745; margin-top: 10px;">
+                    Logout
+                </a>
+            {% else %}
+                <p><strong>You haven't created a profile yet.</strong></p>
+            {% endif %}
+
+        </div>
+    </div>
+
+</body>
+</html>

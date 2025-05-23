@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MakeUp Vendors</title>
+    <link rel="stylesheet" href="{% static 'css/vendor_styles.css' %}">
+</head>
+<body>
+    <div class="top-left-button">
+        <a href="{% url 'user_dashboard' %}" class="userdashboard">
+            Go to Dashboard
+        </a>
+    </div>
+    <h2>MakeUp Vendors 🏛️</h2>
+    <form method="get" action="">
+        <label for="budget">Filter by Budget:</label>
+        <select name="budget" id="budget" onchange="this.form.submit()">
+            {% with budget=request.GET.budget %}
+            <option value="" {% if not budget %}selected{% endif %}>All</option>
+            <option value="25000_below" {% if budget == '25000_below' %}selected{% endif %}>Below 25,000</option>
+            <option value="50000_below" {% if budget == '50000_below' %}selected{% endif %}>Below 50,000</option>
+            <option value="100000_below" {% if budget == '100000_below' %}selected{% endif %}>Below 1,00,000</option>
+            <option value="100000_above" {% if budget == '100000_above' %}selected{% endif %}>Above 1,00,000</option>
+        {% endwith %}
+        </select>
+    </form>
+    <br>
+
+    <div class="vendor-container">
+        {% for vendor in vendors %}
+        <div class="vendor-card">
+            <img src="{{ vendor.profile_pic.url }}" alt="{{ vendor.name }} Profile Picture" class="profile-pic">
+            <h3>{{ vendor.name }}</h3>
+            <p><strong>Email:</strong> {{ vendor.email }}</p>
+            <p><strong>Mobile:</strong> {{ vendor.mobile }}</p>
+            <p><strong>Place:</strong> {{ vendor.place }}</p>
+            <p><strong>Username:</strong> {{ vendor.username }}</p>
+            <p><strong>Organization:</strong> {{ vendor.organization }}</p>
+            <p><strong>Budget:</strong> {{ vendor.budget }}</p>
+<!--            <p><strong>Bio:</strong> {{ vendor.bio }}</p>-->
+            <a href="{% url 'vendor_detail' vendor.id %}" class="view-details-btn">
+                🔍 View Details
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

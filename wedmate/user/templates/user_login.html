@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Login</title>
+    <link rel="stylesheet" href="{% static 'css/user_login.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-box">
+            <h2>User Login</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+
+                <button type="submit" class="login-btn">Login</button>
+
+                {% if messages %}
+                    {% for m in messages %}
+                        <p class="error-message">{{ m }}</p>
+                    {% endfor %}
+                {% endif %}
+            </form>
+
+            <div class="bottom-links">
+                <a href="{% url 'user_otp' %}">Forgot Password?</a> |
+                <a href="{% url 'user_register' %}">New User? Register</a> |
+                <a href="{% url 'home' %}">Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

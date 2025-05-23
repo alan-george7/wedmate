@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | WedMate</title>
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">💼 Admin Panel</div>
+            <div class="nav-links">
+                <a href="{% url 'home' %}">🏠 Home</a>
+                <a href="{% url 'admin_logout' %}">🚪 Logout</a>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <h2>Welcome, Admin</h2>
+            <div class="button-group">
+                <a href="{% url 'admin_user_accounts' %}" class="admin-btn">👤 User Accounts</a>
+                <a href="{% url 'admin_vendor_accounts' %}" class="admin-btn">🏢 Vendor Accounts</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

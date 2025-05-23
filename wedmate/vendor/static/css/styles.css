@@ -1,0 +1,113 @@
+/* Body styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #ffb6a1, #fff4e6);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container for the form */
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Heading styles */
+h2 {
+    color: #333; /* Dark gray for the heading */
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Form group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Label styles */
+label {
+    font-size: 14px;
+    color: #555; /* Dark gray for labels */
+    font-weight: 500;
+}
+
+/* Input field styling */
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Focus state for input fields */
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #4CAF50; /* Light green border on focus */
+}
+
+/* Button styling */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50; /* Green background */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button[type="submit"]:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Bottom links */
+.bottom-links {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555; /* Dark gray for links */
+}
+
+.bottom-links a {
+    color: #4CAF50; /* Green color for links */
+    text-decoration: none;
+    margin: 0 8px;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for links */
+.bottom-links a:hover {
+    color: #45a049; /* Darker green on hover */
+}
+
+/* Alert message styling */
+.alert {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* Small adjustments for mobile responsiveness */
+@media screen and (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+}

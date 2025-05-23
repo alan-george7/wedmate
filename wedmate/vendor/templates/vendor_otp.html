@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vendor OTP Verification</title>
+    <link rel="stylesheet" href="{% static 'css/vendor_otp.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="otp-wrapper">
+        <div class="otp-box">
+            <h2>Vendor OTP Verification</h2>
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="input-group">
+                    <label for="email">Vendor Email</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <button type="submit" class="otp-btn">Send OTP</button>
+
+                {% if messages %}
+                    {% for m in messages %}
+                        <p class="error-message">{{ m }}</p>
+                    {% endfor %}
+                {% endif %}
+            </form>
+
+            <div class="bottom-links">
+                <a href="{% url 'vendor_login' %}">Vendor Login</a> |
+                <a href="{% url 'home' %}">Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

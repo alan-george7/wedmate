@@ -1,0 +1,54 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Vendor</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/booking.css' %}">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'user_dashboard' %}" class="back-button">← Back to Dashboard</a>
+        <h2>Book {{ vendor.name }}</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="datepicker">Select Event Date:</label>
+            <input type="text" id="datepicker" name="event_date" required>
+
+            {{ form.event_location.label_tag }} {{ form.event_location }}
+            {{ form.details.label_tag }} {{ form.details }}
+
+            <button type="submit">Book Now</button>
+        </form>
+    </div>
+
+    <script>
+        $(function() {
+            var bookedDates = {{ booked_dates|safe }};
+
+            function disableDates(date) {
+                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                return [bookedDates.indexOf(string) == -1];
+            }
+
+            $("#datepicker").datepicker({
+                dateFormat: 'yy-mm-dd',
+                beforeShowDay: disableDates,
+                minDate: 0,  // prevent past dates
+                onSelect: function(dateText) {
+                    // Set the value of the hidden Django form field
+                    $("input[name='event_date']").val(dateText);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

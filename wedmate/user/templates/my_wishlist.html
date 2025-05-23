@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Wishlist</title>
+    <link rel="stylesheet" href="{% static 'css/vendor_styles.css' %}">
+</head>
+<body>
+    <div class="top-left-button">
+        <a href="{% url 'user_dashboard' %}" class="userdashboard">
+            Go to Dashboard
+        </a>
+    </div>
+
+    <h2>My Wishlist 💖</h2>
+
+    <div class="vendor-container">
+        {% for item in wishlist_items %}
+        <div class="vendor-card">
+            <img src="{{ item.vendor.profile_pic.url }}" alt="{{ item.vendor.name }} Profile Picture" class="profile-pic">
+            <h3>{{ item.vendor.name }}</h3>
+            <p><strong>Email:</strong> {{ item.vendor.email }}</p>
+            <p><strong>Mobile:</strong> {{ item.vendor.mobile }}</p>
+            <p><strong>Place:</strong> {{ item.vendor.place }}</p>
+            <p><strong>Username:</strong> {{ item.vendor.username }}</p>
+            <p><strong>Organization:</strong> {{ item.vendor.organization }}</p>
+            <p><strong>Budget:</strong> {{ item.vendor.budget }}</p>
+            <a href="{% url 'vendor_detail' item.vendor.id %}" class="view-details-btn">
+                🔍 View Details
+            </a>
+            <form action="{% url 'remove_from_wishlist' item.vendor.id %}" method="post" style="margin-top: 10px;">
+                {% csrf_token %}
+                <button type="submit" class="view-details-btn" style="background-color: #dc3545;">
+                    Remove from Wishlist
+                </button>
+            </form>
+        </div>
+        {% empty %}
+        <p>You haven't added any vendors to your wishlist yet.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

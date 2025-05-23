@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vendor Profile</title>
+    <link rel="stylesheet" href="{% static 'css/view_profile.css' %}">
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-pic">
+                {% if vendor.profile_pic %}
+                    <img src="{{ vendor.profile_pic.url }}" alt="Profile Picture">
+                {% else %}
+                    <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Picture">
+                {% endif %}
+            </div>
+            <div class="profile-info">
+                <h2>{{ vendor.name }}</h2>
+                <p><strong>Organization:</strong> {{ vendor.organization }}</p>
+            </div>
+        </div>
+
+        <div class="profile-details">
+            <p><strong>Email:</strong> {{ vendor.email }}</p>
+            <p><strong>Mobile:</strong> {{ vendor.mobile }}</p>
+            <p><strong>Business Type:</strong> {{ vendor.business_type }}</p>
+            <p><strong>Place:</strong> {{ vendor.place }}</p>
+            <p><strong>Bio:</strong> {{ vendor.bio }}</p>
+            <p><strong>Budget:</strong> {{ vendor.budget }}</p>
+            <p><strong>Username:</strong> {{ vendor.username }}</p>
+        </div>
+
+        <div class="work-photos">
+            <h3>Work Photos</h3>
+            <div class="photos-gallery">
+                {% for photo in work_photos %}
+                    <img src="{{ photo.photo.url }}" alt="Work Photo">
+                {% empty %}
+                    <p>No work photos uploaded yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <br>
+        <!-- Upload form -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="work_photo" accept="image/*" required>
+            <button type="submit" class="btn btn-primary mt-2">Upload Work Photo</button>
+        </form>
+
+            <br>
+
+        <div class="profile-actions">
+            <a href="{% url 'edit_vendor_profile' %}" class="action-button">✏️ Edit Profile</a>
+            <a href="{% url 'vendor_dashboard' %}" class="action-button">🏠 Vendor Dashboard</a>
+            <a href="{% url 'vendor_logout' %}" class="action-button">🚪 Logout</a>
+        </div>
+    </div>
+</body>
+</html>

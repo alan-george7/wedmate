@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About | WedMate</title>
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+</head>
+<body>
+    <div class="about-container">
+        <div class="about-flex">
+            <div class="about-image">
+                <img src="{% static 'images/wed_pic.jpg' %}" alt="WedMate About">
+            </div>
+            <div class="about-content">
+                <h1>About WedMate 💍</h1>
+                <p>Welcome to <strong>WedMate</strong> — your trusted companion for creating unforgettable wedding memories. Whether you’re planning an intimate gathering or a grand celebration, we bring everything you need to your fingertips.</p>
+                <p>From finding the perfect venue and hiring talented vendors to managing bookings and streamlining communication, WedMate simplifies every step of your wedding planning journey.</p>
+                <p>Let us handle the details while you focus on cherishing every moment. Start planning your dream wedding with <strong>WedMate</strong> today!</p>
+                <div class="buttons">
+                    <a href="{% url 'user_register' %}" class="get-started">Get Started 💖</a>
+                    <a href="/" class="go-home">🏠 Go to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

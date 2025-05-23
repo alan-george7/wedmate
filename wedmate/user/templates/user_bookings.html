@@ -1,0 +1,44 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="{% static 'css/user_bookings.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>My Bookings</h1>
+
+        {% if bookings %}
+            <div class="bookings-list">
+                {% for booking in bookings %}
+                    <div class="booking-card">
+                        <h2>{{ booking.vendor.name }}</h2>
+                        <p><strong>Booking Date:</strong> {{ booking.booking_date|date:"F d, Y" }}</p>
+                        <p><strong>Location:</strong> {{ booking.event_location }}</p>
+                        <p><strong>Status:</strong> <span class="status">{{ booking.status }}</span></p>
+
+                        {% if booking.status != 'Cancelled' %}
+                        <form action="{% url 'cancel_booking' booking.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn cancel-btn">Cancel Booking</button>
+                        </form>
+                        {% else %}
+                        <p class="cancelled-text">Booking Cancelled</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-bookings">You have no bookings yet.</p>
+        {% endif %}
+
+        <div class="buttons">
+            <a href="{% url 'user_dashboard' %}" class="btn">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

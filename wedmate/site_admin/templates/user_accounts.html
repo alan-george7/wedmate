@@ -1,0 +1,26 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Accounts</title>
+    <link rel="stylesheet" href="{% static 'css/account_tables.css' %}">
+</head>
+<body>
+<div class="container">
+    <a href="{% url 'admin_dashboard' %}" class="nav-link">← Back to Dashboard</a>
+    <h2>User Accounts</h2>
+    <table>
+        <tr><th>Name</th><th>Email</th><th>Username</th></tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.username }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accepted Bookings</title>
+    <link rel="stylesheet" href="{% static 'css/booking_requests.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Accepted Bookings</h2>
+
+        {% if bookings %}
+            <ul class="booking-list">
+                {% for booking in bookings %}
+                    <li class="booking-item">
+                        <strong>User:</strong> {{ booking.user.name }} <br>
+                        <strong>Email:</strong> {{ booking.user.email }} <br>
+                        <strong>Mobile:</strong> {{ booking.user.mobile }} <br>
+                        <strong>Event Date:</strong> {{ booking.event_date }} <br>
+                        <strong>Event Location:</strong> {{ booking.event_location }} <br>
+                        <strong>Details:</strong> {{ booking.details }} <br>
+                        <strong>Status:</strong> {{ booking.status }} <br>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No accepted bookings yet.</p>
+        {% endif %}
+
+        <a href="{% url 'vendor_dashboard' %}" class="back-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>
